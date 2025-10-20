@@ -1,4 +1,3 @@
-
 # Idiomatic Prompt Generator
 
 This project transforms plain human-written text into idiomatic expressions, with the goal of generating diverse and natural-sounding prompts. These prompts can be used to fine-tune language models for more nuanced and expressive output.
@@ -12,14 +11,14 @@ This project transforms plain human-written text into idiomatic expressions, wit
 
 ## 🚀 Use Case
 
-When building a language model and want it to understand or generate idiomatic, non-literal language. This tool helps by transforming straightforward prompts like:
+You're building a language model and want it to understand or generate idiomatic, non-literal language. This tool helps by transforming straightforward prompts 
+like:
 
-"I’m very happy today."
+`"I’m very happy today."`
 
 into:
 
-
-"I'm on cloud nine today."
+`"I'm on cloud nine today."`
 
 
 These transformed prompts can then be used in datasets for **fine-tuning** or **data augmentation**.
