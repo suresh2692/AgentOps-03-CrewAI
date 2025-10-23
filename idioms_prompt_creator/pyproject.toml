@@ -1,0 +1,31 @@
+[project]
+name = "idioms_prompt_creator"
+version = "0.1.0"
+description = "idioms-prompt-creator using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[azure-ai-inference,tools]>=0.203.1,<1.0.0",
+]
+
+[project.scripts]
+idioms_prompt_creator = "idioms_prompt_creator.main:run"
+run_crew = "idioms_prompt_creator.main:run"
+train = "idioms_prompt_creator.main:train"
+replay = "idioms_prompt_creator.main:replay"
+test = "idioms_prompt_creator.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+required-environments = [
+  "sys_platform == 'darwin' and platform_machine == 'x86_64'",
+  "sys_platform == 'darwin' and platform_machine == 'arm64'"
+]
+
+
+[tool.crewai]
+type = "crew"
+

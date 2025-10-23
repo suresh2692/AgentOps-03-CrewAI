@@ -1,0 +1,41 @@
+prompt_task:
+  description: >
+    Generate simple sentences describing {topic}.
+  expected_output: >
+    A text file with atleast {num_sentences} sentences in literal_prompts.txt without ```` marks.
+  agent: literal_prompt_generator
+  output_file: output/{date}_{topic}_literal_prompts.txt
+  
+linguistic_task:
+  description: >
+    Read the input file and transform each of the literal prompts into idiomatic, metaphorical, or figurative versions.
+  expected_output: >
+    A text file with all the transformed idiomatic prompts in idiomatic_prompts.txt without ```` marks.
+  agent: linguistic_stylist
+  context: [prompt_task]
+  output_file: output/{date}_{topic}_idiomatic_prompts.txt
+
+curator_dataset_task:
+  description: >
+    Read the input files and combine literal and idiomatic prompts into a structured JSONL dataset for fine-tuning language models.
+  expected_output: >
+    A json file in prompt_pairs.jsonl without ```` marks.
+  agent: data_curator
+  context: [prompt_task, linguistic_task]
+  # input_files: 
+  #   - output/{date}_{topic}_literal_prompts.txt
+  #   - output/{date}_{topic}_idiomatic_prompts.txt
+  output_file: output/{date}_{topic}_prompt_pairs.jsonl
+
+quality_evaluator_task:
+  description: >
+    Use LLM-based scoring to assess semantic similarity, creativity, and expressiveness of idiomatic prompts
+  expected_output: >
+    A markdown file with table containing input literal prompts, idiomatic prompts and their scores and remarks in evaluation_report.md
+  agent: linguistic_quality_evaluator
+  context: [curator_dataset_task]
+  # input_files:
+  #   - output/{date}_{topic}_literal_prompts.txt
+  #   - output/{date}_{topic}_idiomatic_prompts.txt
+  output_file: output/{date}_{topic}_evaluation_report.md
+
